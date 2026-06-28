@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import { Blocks, BookOpen, GitFork, NotebookPen, Workflow } from '@lucide/astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: string;
+}
+
+const {
+  title = 'OwnerLens — ownership evidence for Entra workload identities',
+  description = 'Open-source ownership evidence for Entra Service Principals, Managed Identities and Azure Resource Groups.',
+  current = ''
+} = Astro.props;
+
+const pageTitle = title.includes('OwnerLens') ? title : `${title} | OwnerLens`;
+const ownerLensVersion = import.meta.env.PUBLIC_OWNERLENS_VERSION ?? 'dev';
+const ownerLensReleaseUrl = ownerLensVersion === 'dev'
+  ? 'https://github.com/kodevza/OwnerLens/releases/latest'
+  : `https://github.com/kodevza/OwnerLens/releases/tag/${encodeURIComponent(ownerLensVersion)}`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url.href} />
+    <link rel="canonical" href={Astro.url.href} />
+    <script src="/code-copy.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="site-header__inner">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-text">
+              <a class="brand-home" href="/">OwnerLens</a>
+              <small><a href={ownerLensReleaseUrl}>{ownerLensVersion}</a></small>
+            </span>
+          </div>
+          <nav class="nav" aria-label="Main navigation">
+            <a href="/how-it-works/" aria-current={current === 'how' ? 'page' : undefined}>
+              <Workflow size={16} aria-hidden="true" />
+              How it works
+            </a>
+            <a href="/docs/" aria-current={current === 'docs' ? 'page' : undefined}>
+              <BookOpen size={16} aria-hidden="true" />
+              Docs
+            </a>
+            <a href="/extend/" aria-current={current === 'extend' ? 'page' : undefined}>
+              <Blocks size={16} aria-hidden="true" />
+              Extend
+            </a>
+            <a href="/field-notes/" aria-current={current === 'field-notes' ? 'page' : undefined}>
+              <NotebookPen size={16} aria-hidden="true" />
+              Field notes
+            </a>
+            <a href="https://github.com/kodevza/OwnerLens">
+              <GitFork size={16} aria-hidden="true" />
+              GitHub
+            </a>
+          </nav>
+        </div>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <div class="site-footer__inner">
+          <span>Static site. No tracking. No cookies.</span>
+          <span><a href="https://github.com/kodevza/OwnerLens">GitHub</a> · <a href="/field-notes/">Field notes</a></span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

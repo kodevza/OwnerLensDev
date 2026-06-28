@@ -1,0 +1,19 @@
+{
+  "name": "ownerlens-dev-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "new:note": "node scripts/new-field-note.mjs"
+  },
+  "dependencies": {
+    "@lucide/astro": "^1.21.0",
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

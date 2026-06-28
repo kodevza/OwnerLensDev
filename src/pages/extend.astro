@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Extend OwnerLens" description="How to add external ownership evidence to OwnerLens." current="extend">
+  <article class="content">
+    <p class="eyebrow">Extend</p>
+    <h1>Add evidence sources without destroying the evidence model.</h1>
+    <p class="lead">External data should be added as another signal with source, logic and confidence. It should not overwrite raw evidence.</p>
+
+    <h2>Good enrichment sources</h2>
+    <ul>
+      <li>CMDB application ownership</li>
+      <li>deployment pipeline ownership</li>
+      <li>subscription and landing zone metadata</li>
+      <li>platform team mappings</li>
+      <li>activity and deployment log enrichment</li>
+    </ul>
+
+    <h2>Minimum evidence contract</h2>
+    <p>Every external signal should answer four questions:</p>
+    <ul>
+      <li><strong>target</strong> — which SP, MI, RG, app or resource the evidence belongs to</li>
+      <li><strong>candidate</strong> — which person, group or team may own it</li>
+      <li><strong>source</strong> — where the evidence came from</li>
+      <li><strong>logic</strong> — why this source implies ownership</li>
+    </ul>
+
+     </article>
+</BaseLayout>

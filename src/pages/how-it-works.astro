@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="How OwnerLens works" description="OwnerLens evidence model for Entra workload identity ownership." current="how">
+  <article class="content">
+    <p class="eyebrow">How it works</p>
+    <h1>OwnerLens is an evidence pipeline, not an ownership oracle.</h1>
+    <p class="lead">It collects raw signals, keeps their source visible, and produces candidates that a human or governance workflow can validate.</p>
+
+    <h2>1. Collect tenant data</h2>
+    <p>OwnerLens reads Entra and Azure metadata for Service Principals, Managed Identities and Resource Groups. Collection should stay boring: raw data first, interpretation later.</p>
+
+    <h2>2. Normalize entities</h2>
+    <p>Different Azure and Entra records are normalized into stable local structures so lists, filters, evidence views and exports use one model.</p>
+
+    <h2>3. Extract evidence</h2>
+    <p>Signals such as tags, app owners, RBAC context, resource group metadata, home resource context and external enrichment become explicit owner evidence records.</p>
+
+    <h2>4. Rank owner candidates</h2>
+    <p>Owner candidates are ranked by source quality and confidence. Weak signals are still useful, but they must not be presented as final accountability.</p>
+
+    <h2>5. Export for review</h2>
+    <p>The output should be usable outside the local UI: CSV/JSON for IAM review, GRC workflows, partner delivery, ServiceNow import, or remediation planning.</p>
+
+    <blockquote>Design rule: do not hide uncertainty. Showing why the owner candidate was selected is more important than pretending the answer is final.</blockquote>
+  </article>
+</BaseLayout>

@@ -1,0 +1,18 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  src?: string;
+  alt?: string;
+}
+const { title, description, src, alt = title } = Astro.props;
+---
+<article class="screenshot-card">
+  <div class="screenshot-card__image">
+    {src ? <img src={src} alt={alt} loading="lazy" decoding="async" /> : <div class="placeholder">Replace with real OwnerLens screenshot</div>}
+  </div>
+  <div class="screenshot-card__body">
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+</article>

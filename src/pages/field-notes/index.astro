@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const modules = import.meta.glob('./*/index.md', { eager: true });
+const notes = Object.entries(modules)
+  .map(([path, mod]) => {
+    const frontmatter = (mod as any).frontmatter ?? {};
+    const slug = frontmatter.slug ?? path.split('/').at(-2);
+    const rawDate = frontmatter.date ? new Date(frontmatter.date) : null;
+    const dateValue = rawDate && !Number.isNaN(rawDate.valueOf()) ? rawDate : new Date('1970-01-01');
+    return {
+      title: frontmatter.title ?? slug,
+      description: frontmatter.description ?? '',
+      date: dateValue,
+      displayDate: new Intl.DateTimeFormat('en-CA', { dateStyle: 'medium' }).format(dateValue),
+      url: `/field-notes/${slug}/`
+    };
+  })
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf());
+---
+<BaseLayout title="Field notes" description="OwnerLens field notes on Entra and Azure ownership evidence." current="field-notes">
+  <section class="content">
+    <p class="eyebrow">Field Notes</p>
+    <h1>Technical notes on workload identity ownership.</h1>
+    <p class="lead">Short notes focused on evidence, accountability and remediation workflow friction.</p>
+  </section>
+  <section class="note-list section">
+    {notes.map((note) => (
+      <a class="note-row" href={note.url}>
+        <small>{note.displayDate}</small>
+        <h3>{note.title}</h3>
+        <p>{note.description}</p>
+      </a>
+    ))}
+  </section>
+</BaseLayout>
