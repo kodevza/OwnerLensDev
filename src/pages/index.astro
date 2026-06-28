@@ -1,11 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ScreenshotCard from '../components/ScreenshotCard.astro';
+import evidenceList from './docs/screens/evidence_list.png';
+import miOverview from './docs/screens/mi_overview.png';
+import setTags from './docs/screens/set_tags.png';
+import spOverview from './docs/screens/sp_overview.png';
 ---
 <BaseLayout current="home">
   <section class="hero">
     <div>
-      <p class="eyebrow">Entra · Azure · Workload Identity Governance</p>
+      <p class="eyebrow">Entra · Azure · Workload Identity Ownership Evidence</p>
       <h1>Who own workload identities?</h1>
       <p class="lead">OwnerLens is an open-source tool for collecting ownership evidence around Entra Service Principals, Managed Identities and Azure Resource Groups, then turning that evidence into owner candidates with source, logic and confidence.</p>
       <div class="actions">
@@ -51,10 +55,9 @@ source: azure-rbac-context + app metadata</pre>
     </div>
     <div class="flow">
       <div class="flow-step"><strong>01</strong><h3>Collect</h3><span>Read Entra and Azure data.</span></div>
-      <div class="flow-step"><strong>02</strong><h3>Normalize</h3><span>Build stable SP / MI / RG records.</span></div>
-      <div class="flow-step"><strong>03</strong><h3>Extract</h3><span>Convert raw metadata into evidence signals.</span></div>
-      <div class="flow-step"><strong>04</strong><h3>Rank</h3><span>Produce owner candidates with confidence.</span></div>
-      <div class="flow-step"><strong>05</strong><h3>Export</h3><span>Use CSV/JSON in review and remediation workflows.</span></div>
+      <div class="flow-step"><strong>02</strong><h3>Normalize</h3><span>Convert raw metadata into stable evidence signals.</span></div>
+      <div class="flow-step"><strong>03</strong><h3>Review</h3><span>Keep humans in the loop to confirm candidates and filter out noise.</span></div>
+      <div class="flow-step"><strong>04</strong><h3>Export</h3><span>Use CSV/JSON in review and remediation workflows.</span></div>
     </div>
   </section>
 
@@ -72,7 +75,7 @@ source: azure-rbac-context + app metadata</pre>
           <tr><td>Entra app owners</td><td>Application or service principal owners</td><td>Useful evidence, but named users drift.</td><td><span class="badge medium">Medium</span></td></tr>
           <tr><td>Azure RBAC context</td><td>Subscription/RG assignments</td><td>Find operators or platform teams.</td><td><span class="badge low">Low / Routing</span></td></tr>
           <tr><td>Managed Identity home resource</td><td>Linked Azure resource</td><td>Often the strongest MI ownership clue.</td><td><span class="badge medium">Medium</span></td></tr>
-          <tr><td>External enrichment</td><td>CMDB, ServiceNow, platform team maps</td><td>Add organization-specific ownership evidence.</td><td><span class="badge medium">Custom</span></td></tr>
+          <tr><td>External enrichment</td><td>CMDB, platform team maps</td><td>Add organization-specific ownership evidence.</td><td><span class="badge medium">Custom</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -81,14 +84,14 @@ source: azure-rbac-context + app metadata</pre>
   <section class="section">
     <div class="section-head">
       <p class="eyebrow">Screens</p>
-      <h2>Replace placeholders with real product proof.</h2>
-      <p>Do not make this a pretty page with no evidence. The screenshots should show owner candidates, evidence source, confidence and exportable results.</p>
+      <h2>See the ownership evidence in context.</h2>
+      <p>OwnerLens keeps the review close to the data: owner candidates, source signals, confidence and export-ready evidence are visible in the same workflow.</p>
     </div>
     <div class="screenshot-grid">
-      <ScreenshotCard title="Service Principal evidence" description="List view with owner candidates, permissions and source columns." />
-      <ScreenshotCard title="Managed Identity context" description="Home resource, resource group and Azure context used for routing." />
-      <ScreenshotCard title="Owner evidence detail" description="Raw signals preserved with source, logic and confidence." />
-      <ScreenshotCard title="CSV / JSON export" description="Evidence ready for GRC, IAM review or remediation workflow." />
+      <ScreenshotCard title="Service Principal evidence" description="List view with owner candidates, permissions and source columns." src={spOverview.src} />
+      <ScreenshotCard title="Managed Identity context" description="Home resource, resource group and Azure context used for routing." src={miOverview.src} />
+      <ScreenshotCard title="Owner evidence detail" description="Raw signals preserved with source, logic and confidence." src={evidenceList.src} />
+      <ScreenshotCard title="Tags and routing evidence" description="Evidence ready for GRC, IAM review or remediation workflow." src={setTags.src} />
     </div>
   </section>
 </BaseLayout>

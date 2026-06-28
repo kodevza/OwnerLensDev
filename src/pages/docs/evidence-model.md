@@ -34,4 +34,4 @@ Confidence is a routing hint. Final remediation still needs human or workflow va
 | Entra app owner | useful but often stale or user-based |
 | Azure RBAC context | operator/platform team clue |
 | MI home resource | strong technical lineage clue |
-| CMDB / ServiceNow | business/process ownership clue |
+| CMDB  | business/process ownership clue |

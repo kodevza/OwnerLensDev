@@ -108,7 +108,7 @@ p { margin-top: 0; }
 .card small, .meta { color: var(--faint); }
 .card h3 a { text-decoration: none; }
 
-.flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .flow-step { min-height: 136px; display: flex; flex-direction: column; justify-content: space-between; background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
 .flow-step strong { color: var(--accent); font-size: 0.82rem; text-transform: uppercase; letter-spacing: .08em; }
 .flow-step span { color: var(--muted); font-size: 0.95rem; }
