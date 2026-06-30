@@ -1,18 +1,22 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 const rawDate = frontmatter.date ? new Date(frontmatter.date) : null;
 const date = rawDate && !Number.isNaN(rawDate.valueOf())
   ? new Intl.DateTimeFormat('en-CA', { dateStyle: 'medium' }).format(rawDate)
   : frontmatter.date;
 ---
 <BaseLayout title={frontmatter.title} description={frontmatter.description ?? 'OwnerLens field note'} current="field-notes">
-  <article class="content">
-    <p class="eyebrow">Field Note</p>
-    <h1>{frontmatter.title}</h1>
-    <p class="meta">{date}{frontmatter.updated ? ` · updated ${frontmatter.updated}` : ''}</p>
-    {frontmatter.warning && <p class="warning">{frontmatter.warning}</p>}
-    <slot />
-  </article>
+  <div class="content-layout">
+    <article class="content">
+      <p class="eyebrow">Field Note</p>
+      <h1>{frontmatter.title}</h1>
+      <p class="meta">{date}{frontmatter.updated ? ` · updated ${frontmatter.updated}` : ''}</p>
+      {frontmatter.warning && <p class="warning">{frontmatter.warning}</p>}
+      <slot />
+    </article>
+    <TableOfContents headings={headings} />
+  </div>
 </BaseLayout>

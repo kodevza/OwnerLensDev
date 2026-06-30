@@ -1,13 +1,17 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 
-const { frontmatter } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 ---
 <BaseLayout title={frontmatter.title} description={frontmatter.description ?? 'OwnerLens documentation'} current="docs">
-  <article class="content">
-    <p class="eyebrow">OwnerLens Docs</p>
-    <h1>{frontmatter.title}</h1>
-    {frontmatter.description && <p class="lead">{frontmatter.description}</p>}
-    <slot />
-  </article>
+  <div class="content-layout">
+    <article class="content">
+      <p class="eyebrow">OwnerLens Docs</p>
+      <h1>{frontmatter.title}</h1>
+      {frontmatter.description && <p class="lead">{frontmatter.description}</p>}
+      <slot />
+    </article>
+    <TableOfContents headings={headings} />
+  </div>
 </BaseLayout>
