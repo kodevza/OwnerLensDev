@@ -1,4 +1,11 @@
-# Field Note: Bringing CMDB Ownership Evidence Into IAM Remediation Workflows
+---
+layout: ../../../layouts/FieldNoteLayout.astro
+title: "Field Note: Bringing CMDB Ownership Evidence Into IAM Remediation Workflows"
+date: 2026-07-23
+slug: "external-ownership-sources"
+description: "A practical note about correlating Entra and Azure identity evidence with CMDB, service catalog, and application ownership records."
+warning: "Always verify current Microsoft documentation before treating these notes as implementation guidance."
+---
 
 Raw Microsoft Entra and Azure exports are useful for discovery, but they are rarely sufficient for an effective identity governance or remediation workflow.
 
