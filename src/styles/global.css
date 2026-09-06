@@ -65,7 +65,10 @@ main {
 .brand-mark { width: 13px; height: 13px; border-radius: 50%; background: #5bd68b; box-shadow: 0 0 0 6px var(--green-soft); }
 .brand-text { display: flex; flex-direction: column; }
 .product-versions { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 2px; }
-.product-versions .badge { color: var(--muted); font-weight: 600; letter-spacing: normal; font-size: 0.68rem; line-height: 1.25; padding: 2px 6px; text-decoration: none; }
+.product-versions .badge { align-items: center; gap: 4px; color: var(--muted); font-weight: 600; letter-spacing: normal; font-size: 0.68rem; line-height: 1.25; padding: 2px 6px; }
+.product-versions .badge a { color: var(--text); text-decoration: none; }
+.product-versions .badge a:hover { color: var(--accent); }
+.badge-bubble { width: 6px; height: 6px; flex: none; border-radius: 50%; background: #5bd68b; box-shadow: 0 0 0 3px var(--green-soft); }
 .brand-home { text-decoration: none; }
 
 .nav { display: flex; align-items: center; gap: 18px; font-size: 0.92rem; color: var(--muted); }

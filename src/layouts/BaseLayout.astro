@@ -43,13 +43,21 @@ const ownerLensLiteUrl = 'https://github.com/kodevza/OwnerLensLite';
       <header class="site-header">
         <div class="site-header__inner">
           <div class="brand">
-            <span class="brand-mark" aria-hidden="true"></span>
             <span class="brand-text">
               <a class="brand-home" href="/">OwnerLens</a>
               <span class="product-versions" aria-label="Product versions">
-                <a class="badge" href={ownerLensReleaseUrl}>OwnerLens {ownerLensVersion}</a>
-                <a class="badge" href={ownerLensGraphUrl}>Graph {ownerLensGraphVersion}</a>
-                <a class="badge" href={ownerLensLiteUrl}>Lite {ownerLensLiteVersion}</a>
+                <span class="badge">
+                  <span class="badge-bubble" aria-hidden="true"></span>
+                  <a href={ownerLensReleaseUrl}>OwnerLens</a> {ownerLensVersion}
+                </span>
+                <span class="badge">
+                  <span class="badge-bubble" aria-hidden="true"></span>
+                  <a href={ownerLensGraphUrl}>OwnerLensGraph</a> {ownerLensGraphVersion}
+                </span>
+                <span class="badge">
+                  <span class="badge-bubble" aria-hidden="true"></span>
+                  <a href={ownerLensLiteUrl}>OwnerLensLite</a> {ownerLensLiteVersion}
+                </span>
               </span>
             </span>
           </div>
