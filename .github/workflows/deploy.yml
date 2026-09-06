@@ -32,12 +32,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Resolve latest OwnerLens release
+      - name: Resolve product versions
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          version="$(gh api repos/kodevza/OwnerLens/releases/latest --jq '.tag_name')"
-          echo "PUBLIC_OWNERLENS_VERSION=$version" >> "$GITHUB_ENV"
+          ownerlens_version="$(gh api repos/kodevza/OwnerLens/releases/latest --jq '.tag_name')"
+          graph_version="$(gh api repos/kodevza/OwnerLensGraph/contents/package.json --jq '.content' | base64 --decode | jq -r '.version')"
+          lite_version="$(gh api 'repos/kodevza/OwnerLensLite/tags?per_page=1' --jq '.[0].name')"
+          echo "PUBLIC_OWNERLENS_VERSION=$ownerlens_version" >> "$GITHUB_ENV"
+          echo "PUBLIC_OWNERLENS_GRAPH_VERSION=$graph_version" >> "$GITHUB_ENV"
+          echo "PUBLIC_OWNERLENS_LITE_VERSION=$lite_version" >> "$GITHUB_ENV"
 
       - name: Build site
         run: npm run build

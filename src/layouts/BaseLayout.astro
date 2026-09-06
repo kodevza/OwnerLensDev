@@ -16,9 +16,13 @@ const {
 
 const pageTitle = title.includes('OwnerLens') ? title : `${title} | OwnerLens`;
 const ownerLensVersion = import.meta.env.PUBLIC_OWNERLENS_VERSION ?? 'dev';
+const ownerLensGraphVersion = import.meta.env.PUBLIC_OWNERLENS_GRAPH_VERSION ?? 'dev';
+const ownerLensLiteVersion = import.meta.env.PUBLIC_OWNERLENS_LITE_VERSION ?? 'dev';
 const ownerLensReleaseUrl = ownerLensVersion === 'dev'
   ? 'https://github.com/kodevza/OwnerLens/releases/latest'
   : `https://github.com/kodevza/OwnerLens/releases/tag/${encodeURIComponent(ownerLensVersion)}`;
+const ownerLensGraphUrl = 'https://github.com/kodevza/OwnerLensGraph';
+const ownerLensLiteUrl = 'https://github.com/kodevza/OwnerLensLite';
 ---
 <!doctype html>
 <html lang="en">
@@ -42,7 +46,11 @@ const ownerLensReleaseUrl = ownerLensVersion === 'dev'
             <span class="brand-mark" aria-hidden="true"></span>
             <span class="brand-text">
               <a class="brand-home" href="/">OwnerLens</a>
-              <small><a href={ownerLensReleaseUrl}>{ownerLensVersion}</a></small>
+              <span class="product-versions" aria-label="Product versions">
+                <a class="badge" href={ownerLensReleaseUrl}>OwnerLens {ownerLensVersion}</a>
+                <a class="badge" href={ownerLensGraphUrl}>Graph {ownerLensGraphVersion}</a>
+                <a class="badge" href={ownerLensLiteUrl}>Lite {ownerLensLiteVersion}</a>
+              </span>
             </span>
           </div>
           <nav class="nav" aria-label="Main navigation">
