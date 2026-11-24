@@ -1,0 +1,48 @@
+.clusters .cluster > rect {
+  fill: rgba(118, 118, 118, 0.14);
+  stroke: #767676;
+  stroke-width: 2px;
+  rx: 8px;
+  filter: none;
+}
+
+.node.default > .label-container:not([style*="fill:"], [style*="stroke:"]) {
+  fill: rgba(54, 127, 204, 0.68);
+  stroke: #767676;
+  stroke-width: 2px;
+  filter: none;
+}
+
+.edgeLabel,
+.edgeLabel p,
+.edgeLabel .labelBkg {
+  background-color: transparent;
+}
+
+.edgeLabel rect {
+  fill: none;
+}
+
+.cluster-label p,
+.edgeLabel p {
+  color: #7c7c7c;
+  font-weight: 600;
+}
+
+.cluster-label :is(text, tspan),
+.edgeLabel :is(text, tspan) {
+  fill: #7c7c7c;
+  stroke: none;
+  font-weight: 600;
+}
+
+.node.default > .label-container:not([style*="fill:"], [style*="stroke:"]) ~ .label p {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.node.default > .label-container:not([style*="fill:"], [style*="stroke:"]) ~ .label :is(text, tspan) {
+  fill: #ffffff;
+  stroke: none;
+  font-weight: 600;
+}

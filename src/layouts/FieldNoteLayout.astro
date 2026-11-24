@@ -10,7 +10,7 @@ const date = rawDate && !Number.isNaN(rawDate.valueOf())
 ---
 <BaseLayout title={frontmatter.title} description={frontmatter.description ?? 'OwnerLens field note'} current="field-notes">
   <div class="content-layout">
-    <article class="content">
+    <article class:list={['content', { 'center-images': frontmatter.centerImages }]}>
       <p class="eyebrow">Field Note</p>
       <h1>{frontmatter.title}</h1>
       <p class="meta">{date}{frontmatter.updated ? ` · updated ${frontmatter.updated}` : ''}</p>
@@ -20,3 +20,10 @@ const date = rawDate && !Number.isNaN(rawDate.valueOf())
     <TableOfContents headings={headings} />
   </div>
 </BaseLayout>
+
+<style>
+  .content.center-images :global(img) {
+    display: block;
+    margin-inline: auto;
+  }
+</style>

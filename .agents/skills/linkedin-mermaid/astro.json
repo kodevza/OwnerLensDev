@@ -1,0 +1,18 @@
+{
+  "theme": "dark",
+  "fontFamily": "Arial, sans-serif",
+  "deterministicIds": true,
+  "themeVariables": {
+    "primaryColor": "#1c293b",
+    "primaryBorderColor": "#7399bd",
+    "primaryTextColor": "#eef2f7",
+    "lineColor": "#a7bad1",
+    "clusterBkg": "#17212f",
+    "clusterBorder": "#607894",
+    "edgeLabelBackground": "#17212f",
+    "actorBkg": "#767676",
+    "actorTextColor": "#ffffff",
+    "actorLineColor": "#999999",
+    "signalColor": "#999999"
+  }
+}

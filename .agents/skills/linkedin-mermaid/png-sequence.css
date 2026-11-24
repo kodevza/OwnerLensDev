@@ -1,0 +1,11 @@
+rect.actor {
+  fill: rgba(54, 127, 204, 0.68);
+  stroke: #767676;
+  stroke-width: 2px;
+}
+
+text.actor tspan {
+  fill: #ffffff;
+  stroke: none;
+  font-weight: 600;
+}

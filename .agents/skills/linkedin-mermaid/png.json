@@ -1,0 +1,20 @@
+{
+  "flowchart": {
+    "diagramPadding": 24,
+    "nodeSpacing": 70,
+    "rankSpacing": 70,
+    "subGraphTitleMargin": {
+      "top": 14,
+      "bottom": 20
+    }
+  },
+  "sequence": {
+    "messageFontWeight": 600
+  },
+  "themeVariables": {
+    "lineColor": "#767676",
+    "actorLineColor": "#767676",
+    "signalColor": "#767676",
+    "signalTextColor": "#7c7c7c"
+  }
+}

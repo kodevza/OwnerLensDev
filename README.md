@@ -24,6 +24,17 @@ npm install
 npm run dev
 ```
 
+Saving a Field Note source at `content/field-notes/<slug>/index.mmd.md` while the dev server is running regenerates the Astro page and its SVG diagrams. [Mermaid export instructions](.agents/skills/linkedin-mermaid/SKILL.md)
+
+## Export a field note for LinkedIn
+
+```bash
+bash .agents/skills/linkedin-mermaid/scripts/export.sh --linkedin \
+  content/field-notes/governing-ai-agents-through-purpose-bound-access/index.mmd.md
+```
+
+The command writes `article.txt` and numbered PNG diagrams to `export/<slug>/`. Paste the text into the LinkedIn article editor and replace each `[Diagram N]` marker with `diagram-N.png`.
+
 ## Build
 
 ```bash
