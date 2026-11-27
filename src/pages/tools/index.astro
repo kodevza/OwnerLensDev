@@ -1,0 +1,57 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const ownerLensRepository = 'https://github.com/kodevza/OwnerLens';
+const ownerLensVersion = import.meta.env.PUBLIC_OWNERLENS_VERSION;
+const ownerLensRelease = ownerLensVersion && ownerLensVersion !== 'dev'
+  ? `${ownerLensRepository}/releases/tag/${encodeURIComponent(ownerLensVersion)}`
+  : `${ownerLensRepository}/releases`;
+
+const tools = [
+  {
+    name: 'OwnerLens',
+    description: 'Collect and review workload identity ownership evidence across Microsoft Entra and Azure.',
+    overview: '/tools/ownerlens/',
+    repository: ownerLensRepository,
+    version: ownerLensVersion,
+    releases: ownerLensRelease,
+  },
+  {
+    name: 'OwnerLensGraph',
+    description: 'Explore relationships between identities, resources and ownership signals.',
+    repository: 'https://github.com/kodevza/OwnerLensGraph',
+    version: import.meta.env.PUBLIC_OWNERLENS_GRAPH_VERSION,
+  },
+  {
+    name: 'OwnerLensLite',
+    description: 'Inspect the ownership and dependencies of a single Entra enterprise application.',
+    repository: 'https://github.com/kodevza/OwnerLensLite',
+    version: import.meta.env.PUBLIC_OWNERLENS_LITE_VERSION,
+  },
+];
+---
+<BaseLayout title="Tools" description="Open-source tools for reviewing ownership evidence across non-human identities." current="tools">
+  <header class="page-intro">
+    <h1>Tools</h1>
+    <p class="lead">Open-source tools for understanding who owns workloads, identities and resources.</p>
+  </header>
+
+  <ul class="tool-list">
+    {tools.map(({ name, overview, description, repository, version, releases }) => (
+      <li>
+        <div>
+          <h2>{overview ? <a href={overview}>{name}</a> : name}</h2>
+          <p>{description}</p>
+        </div>
+        <div class="tool-list__links">
+          {overview && <a href={overview}>Overview</a>}
+          <a href={repository} aria-label={`${name} on GitHub`}>GitHub <ArrowUpRight size={15} aria-hidden="true" /></a>
+          {releases
+            ? <a href={releases}>{version && version !== 'dev' ? version : 'Releases'}</a>
+            : version && version !== 'dev' && <span>{version}</span>}
+        </div>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

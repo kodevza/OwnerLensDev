@@ -4,6 +4,8 @@ title: "Field Note: A Lighter Path to Service Principal Ownership Evidence"
 date: 2026-08-26
 slug: "ownerlenslite-evidence-first-ownership"
 description: "A short preview of OwnerLensLite, a local PowerShell tool for building an evidence-backed ownership and dependency view for one Entra enterprise application."
+topics: [tools, workload-identities]
+format: case-study
 warning: "Always verify current Microsoft documentation before treating these notes as implementation guidance."
 ---
 

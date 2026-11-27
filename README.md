@@ -1,6 +1,6 @@
 # ownerlens.dev
 
-Astro static site for OwnerLens.
+Astro static site for OwnerLens, a technical knowledge base on non-human identity.
 
 ## Why Astro
 
@@ -9,11 +9,15 @@ This site keeps the useful Hugo pattern: content lives in Markdown files. The di
 ## Structure
 
 ```text
-src/pages/index.astro                 landing page
-src/pages/how-it-works.astro          product explanation
+src/pages/index.astro                 knowledge base home
+src/pages/research/index.astro        Research Library and filters
+src/pages/topics/                     knowledge domain pages
+src/lib/topics.ts                     domain definitions and reference sources
+src/pages/tools/                      open-source tools and OwnerLens overview
+src/pages/how-it-works.astro          OwnerLens tool overview
 src/pages/extend.astro                external evidence/enrichment model
 src/pages/docs/*.md                   docs from Markdown
-src/pages/field-notes/*/index.md      migrated field notes from the old Hugo repo
+src/pages/field-notes/*/index.md      knowledge entries and their assets
 public/code-copy.js                   copy buttons for selected code blocks
 ```
 
@@ -48,6 +52,8 @@ Static output goes to `dist/`.
 ```bash
 npm run new:note -- entra-risk-review "Field Note: Entra Risk Review"
 ```
+
+Add one or more domain slugs from `src/lib/topics.ts` to the entry’s `topics` frontmatter. Each entry appears on every domain page it is tagged with and can be filtered by domain in the Research Library. Set `format` to `technical-note`, `reference-design`, or `case-study`. For Mermaid articles, edit the source under `content/field-notes/` so the topics survive regeneration.
 
 Each field note is a Markdown page bundle:
 

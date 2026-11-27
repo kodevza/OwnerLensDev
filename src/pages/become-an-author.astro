@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const referenceDesign = '/field-notes/governing-ai-agents-through-purpose-bound-access/';
+const authorContact = 'https://www.linkedin.com/in/konradzawadka/';
+---
+<BaseLayout
+  title="Become an Author"
+  description="Publish a project, tool or field note about workload identity, governance, AI agents or MCP in the OwnerLens Research Library."
+  current="become-an-author"
+>
+  <article class="content">
+    <header>
+      <h1>Become an Author</h1>
+      <p class="lead">Building a tool or working on a project in workload identity, governance, AI agents or MCP? Publish it in the OwnerLens Research Library. Show readers what problem it solves and where it fits in the architecture.</p>
+      <div class="actions">
+        <a class="button primary" href={authorContact}>Pitch an article on LinkedIn</a>
+        <a href="/research/">Browse the Research Library</a>
+      </div>
+    </header>
+
+    <h2>Show the problem and how you solved it</h2>
+    <p>A tool walkthrough, an integration write-up or a field note from a real deployment can all make a good article. Give readers the context they need to decide whether the approach would work in their environment.</p>
+    <ul>
+      <li><strong>The problem.</strong> Who ran into it, and what was hard to discover, approve, enforce or audit?</li>
+      <li><strong>Your approach.</strong> What does the project do, what have you tried, and what are its current limitations?</li>
+      <li><strong>The architecture.</strong> Where does it connect, what does it need as input, and what can another component or team do with its output?</li>
+    </ul>
+
+    <h2>Show where your project fits</h2>
+    <p>Your tool might discover identities and ownership evidence, support approval or provisioning, enforce access to MCP tools, or collect runtime evidence. A short example or diagram can show what calls your tool and where the result goes. <a href={referenceDesign}>See the OwnerLens reference architecture</a></p>
+
+    <h2>Send a short pitch</h2>
+    <p>Send Konrad Zawadka a private message on LinkedIn with a working title, a short description of the problem, and where the project fits. If you have a repository, demo or draft, include a link. A few sentences are enough to start.</p>
+
+    <section aria-labelledby="authors">
+      <h2 id="authors">Authors</h2>
+      <p class="author">
+        <img src="/authors/konrad-zawadka.webp" alt="" width="88" height="88" loading="lazy" decoding="async" />
+        <span>Konrad Zawadka</span>
+      </p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .author img {
+    flex: none;
+    margin: 0;
+    border-radius: 50%;
+  }
+</style>

@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const referenceDesign = '/field-notes/governing-ai-agents-through-purpose-bound-access/';
+---
+<BaseLayout
+  title="Advisory"
+  description="Architecture advisory for workload identities, AI agents and MCP, from ownership discovery to purpose-bound access and runtime evidence."
+  current="advisory"
+>
+  <article class="content">
+    <header>
+      <h1>Advisory</h1>
+      <p class="lead">We help teams discover who owns their workload identities and design access for AI agents around an approved business purpose.</p>
+      <div class="actions">
+        <a class="button primary" href="https://www.linkedin.com/in/konradzawadka/">Discuss your use case on LinkedIn</a>
+      </div>
+    </header>
+
+    <h2>Start with evidence from your environment</h2>
+    <p>We inventory service principals, managed identities, agents and the resources they can reach. In Microsoft Entra ID and Azure, we look at directory ownership, Azure RBAC, resource metadata and activity logs. Where available, we check those signals against application inventories or a CMDB. We record the source of each signal so the people responsible for the workload can validate who should own it.</p>
+
+    <h2>Map each agent from purpose to permissions</h2>
+    <p>For each agent, we document the business outcome, who is accountable, what actions the agent needs to perform, and on which systems and data. We map the path from the agent identity through its MCP tools and gateway to the backend API. That map shows where to scope permissions, where a resource owner should approve access, and which changes should trigger another review.</p>
+    <p>We use the Bind, Govern, Release lifecycle to connect approval to runtime controls. Access starts with an approved purpose, stays within that scope as the agent operates, and is removed when the purpose ends. We identify what evidence is needed to verify each step, including revocation.</p>
+
+    <h2>Choose tools for each layer</h2>
+    <ul>
+      <li><strong>Discovery and ownership.</strong> OwnerLens and OwnerLensLite collect ownership evidence. OwnerLensGraph helps trace relationships between identities, resources and ownership signals.</li>
+      <li><strong>Governance and identity.</strong> Our reference design uses OpenIDM for approvals and lifecycle workflows, OpenICF for provisioning, and Microsoft Entra ID for workload authentication.</li>
+      <li><strong>Runtime controls and evidence.</strong> The design uses agentgateway to enforce approved MCP access and OpenTelemetry to capture execution events for review.</li>
+    </ul>
+    <p>We use the stack as a reference and evaluate where your existing services can cover the same roles. <a href={referenceDesign}>Explore the reference architecture</a> · <a href="/tools/">Browse OwnerLens tools</a></p>
+
+    <h2>Turn findings into an implementation plan</h2>
+    <p>We turn the evidence and access map into a prioritized plan. It captures ownership gaps, permissions to review, where to enforce policy, and what to audit. For a pilot, we define how to verify that an approved tool call succeeds, a call outside its scope is denied, and access stops after revocation.</p>
+  </article>
+</BaseLayout>

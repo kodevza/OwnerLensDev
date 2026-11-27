@@ -4,6 +4,8 @@ title: "Governing AI agents through purpose-bound access"
 date: 2026-11-24
 slug: "governing-ai-agents-through-purpose-bound-access"
 description: "A reference design and early demonstrator for binding AI agent access to accountable ownership, approved purpose and runtime evidence."
+topics: [ai-agents-mcp, governance]
+format: reference-design
 centerImages: true
 ---
 

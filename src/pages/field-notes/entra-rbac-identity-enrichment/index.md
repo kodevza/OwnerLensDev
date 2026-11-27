@@ -4,6 +4,8 @@ title: "Field Note: Enriching Entra Workload Identity Evidence with Azure RBAC a
 date: 2026-06-30
 slug: "entra-rbac-identity-enrichment"
 description: "A practical note on enriching Entra service principal and managed identity evidence with Azure RBAC, Azure resources, managed identity home context, and sign-in/activity logs."
+topics: [workload-identities, discovery-operations]
+format: technical-note
 warning: "Always verify current Microsoft documentation before treating these notes as implementation guidance."
 ---
 

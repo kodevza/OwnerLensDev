@@ -1,0 +1,138 @@
+---
+import { ArrowUpRight, Search } from '@lucide/astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { notes } from '../../lib/notes';
+import { researchFormats } from '../../lib/research-formats';
+import { domains } from '../../lib/topics';
+---
+<BaseLayout title="Research Library" description="Search technical notes, reference designs and case studies on non-human identity." current="research">
+  <header class="page-intro research-library-intro">
+    <h1>Research Library</h1>
+    <p class="lead">Technical notes, reference designs and case studies on non-human identity.</p>
+  </header>
+
+  <div class="research-library" data-library>
+    <form class="research-filters" role="search" action="/research/" aria-label="Search the Research Library" hidden>
+      <div class="research-search">
+        <label for="research-query">Search research</label>
+        <div class="research-input">
+          <Search size={18} aria-hidden="true" />
+          <input id="research-query" type="search" name="q" placeholder="Title or keyword" />
+        </div>
+      </div>
+      <div>
+        <label for="research-domain">Domain</label>
+        <select id="research-domain" name="domain">
+          <option value="">All domains</option>
+          {domains.map(({ slug, title }) => <option value={slug}>{title}</option>)}
+        </select>
+      </div>
+      <div>
+        <label for="research-format">Format</label>
+        <select id="research-format" name="format">
+          <option value="">All formats</option>
+          {Object.entries(researchFormats).map(([key, { title }]) => <option value={key}>{title}</option>)}
+        </select>
+      </div>
+      <button class="button" type="reset" hidden>Clear filters</button>
+    </form>
+
+    <section class="research-results" aria-labelledby="research-results-heading">
+      <div class="research-results__heading">
+        <h2 id="research-results-heading">Publications</h2>
+        <span data-result-count role="status">{notes.length} publications</span>
+      </div>
+      <p class="research-empty" data-empty hidden>No publications match these filters.</p>
+      <ul class="research-grid">
+        {notes.map(({ title, description, topics, format, url }) => {
+          const entryDomains = domains.filter(({ slug }) => topics.includes(slug)).map(({ title }) => title);
+          return (
+            <li data-entry data-domains={topics.join(' ')} data-format={format}>
+              <a class="research-card" href={url}>
+                <p class="research-format">{researchFormats[format].label}</p>
+                <h3>{title}</h3>
+                <p class="research-card__summary">{description}</p>
+                {entryDomains.length > 0 && <p class="research-card__domains">{entryDomains.join(' · ')}</p>}
+                <ArrowUpRight class="research-card__arrow" size={18} aria-hidden="true" />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  const library = document.querySelector<HTMLElement>('[data-library]');
+  const filters = library?.querySelector<HTMLFormElement>('form');
+  const query = filters?.querySelector<HTMLInputElement>('[name="q"]');
+  const domain = filters?.querySelector<HTMLSelectElement>('[name="domain"]');
+  const format = filters?.querySelector<HTMLSelectElement>('[name="format"]');
+  const clear = filters?.querySelector<HTMLButtonElement>('button[type="reset"]');
+  const count = library?.querySelector<HTMLElement>('[data-result-count]');
+  const empty = library?.querySelector<HTMLElement>('[data-empty]');
+
+  if (library && filters && query && domain && format && clear && count && empty) {
+    const fields = [query, domain, format];
+    const entries = [...library.querySelectorAll<HTMLElement>('[data-entry]')].map((element) => ({
+      element,
+      text: (element.textContent ?? '').toLocaleLowerCase('en'),
+      domains: element.dataset.domains?.split(' ') ?? [],
+      format: element.dataset.format,
+    }));
+
+    const render = () => {
+      const terms = query.value.trim().toLocaleLowerCase('en').split(/\s+/).filter(Boolean);
+      let total = 0;
+
+      for (const entry of entries) {
+        const match = (!domain.value || entry.domains.includes(domain.value))
+          && (!format.value || entry.format === format.value)
+          && terms.every((term) => entry.text.includes(term));
+        entry.element.hidden = !match;
+        total += Number(match);
+      }
+
+      count.textContent = `${total} ${total === 1 ? 'publication' : 'publications'}`;
+      empty.hidden = total > 0;
+      clear.hidden = !fields.some((field) => field.value);
+    };
+
+    const restore = () => {
+      const params = new URLSearchParams(location.search);
+      for (const field of fields) {
+        field.value = params.get(field.name) ?? '';
+        if (field instanceof HTMLSelectElement && field.selectedIndex < 0) field.selectedIndex = 0;
+      }
+      render();
+    };
+
+    const update = () => {
+      const url = new URL(location.href);
+      for (const field of fields) {
+        const value = field.value.trim();
+        if (value) url.searchParams.set(field.name, value);
+        else url.searchParams.delete(field.name);
+      }
+      history.replaceState(history.state, '', url);
+      render();
+    };
+
+    filters.addEventListener('input', update);
+    filters.addEventListener('submit', (event) => {
+      event.preventDefault();
+      update();
+    });
+    filters.addEventListener('reset', (event) => {
+      event.preventDefault();
+      for (const field of fields) field.value = '';
+      query.focus();
+      update();
+    });
+    window.addEventListener('popstate', restore);
+    restore();
+    library.classList.add('research-library--filterable');
+    filters.hidden = false;
+  }
+</script>

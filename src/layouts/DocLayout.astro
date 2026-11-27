@@ -4,9 +4,10 @@ import TableOfContents from '../components/TableOfContents.astro';
 
 const { frontmatter, headings } = Astro.props;
 ---
-<BaseLayout title={frontmatter.title} description={frontmatter.description ?? 'OwnerLens documentation'} current="docs">
+<BaseLayout title={frontmatter.title} description={frontmatter.description ?? 'OwnerLens documentation'} current="tools">
   <div class="content-layout">
     <article class="content">
+      <a class="back-link" href="/docs/">← Project documentation</a>
       <p class="eyebrow">OwnerLens Docs</p>
       <h1>{frontmatter.title}</h1>
       {frontmatter.description && <p class="lead">{frontmatter.description}</p>}

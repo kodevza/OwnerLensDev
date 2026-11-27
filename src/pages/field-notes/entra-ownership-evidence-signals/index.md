@@ -4,6 +4,8 @@ title: "Field Note: Service Principal Ownership Evidence Signals"
 date: 2026-06-22
 slug: "entra-ownership-evidence-signals"
 description: "A practical note about evidence signals used to infer accountable owners for Entra service principals and managed identities."
+topics: [workload-identities, governance]
+format: technical-note
 warning: "Always verify current Microsoft documentation before treating these notes as implementation guidance."
 ---
 

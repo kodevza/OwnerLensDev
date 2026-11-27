@@ -4,6 +4,8 @@ title: "Field Note: Bringing OwnerLens Evidence Into an OpenIDM Ownership Review
 date: 2026-11-20
 slug: "openidm-entra-owner-review"
 description: "How the Entra ID connector and OwnerLens Lite put ranked owner candidates and supporting evidence into an OpenIDM review."
+topics: [governance, tools]
+format: case-study
 ---
 
 When a Microsoft Entra service principal needs a governance owner, the person asked to take responsibility needs to see why the request reached them. An OwnerLens Lite report can surface candidates and the signals behind them. We wanted that context to stay with the request as it moved from one reviewer to the next.

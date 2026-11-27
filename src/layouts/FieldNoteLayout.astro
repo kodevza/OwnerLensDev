@@ -1,19 +1,26 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import TableOfContents from '../components/TableOfContents.astro';
+import { domains } from '../lib/topics';
+import { researchFormats, type ResearchFormat } from '../lib/research-formats';
 
 const { frontmatter, headings } = Astro.props;
-const rawDate = frontmatter.date ? new Date(frontmatter.date) : null;
-const date = rawDate && !Number.isNaN(rawDate.valueOf())
-  ? new Intl.DateTimeFormat('en-CA', { dateStyle: 'medium' }).format(rawDate)
-  : frontmatter.date;
+const entryDomains = domains.filter(({ slug }) => frontmatter.topics?.includes(slug));
+const format = researchFormats[frontmatter.format as ResearchFormat] ?? researchFormats['technical-note'];
+const title = frontmatter.title.replace(/^Field Note:\s*/i, '');
+
 ---
-<BaseLayout title={frontmatter.title} description={frontmatter.description ?? 'OwnerLens field note'} current="field-notes">
+<BaseLayout title={title} description={frontmatter.description ?? 'OwnerLens knowledge entry'} current="research" type="article">
   <div class="content-layout">
     <article class:list={['content', { 'center-images': frontmatter.centerImages }]}>
-      <p class="eyebrow">Field Note</p>
-      <h1>{frontmatter.title}</h1>
-      <p class="meta">{date}{frontmatter.updated ? ` · updated ${frontmatter.updated}` : ''}</p>
+      <a class="back-link" href="/research/">← Research Library</a>
+      {entryDomains.length > 0 && (
+        <ul class="article-topics" aria-label="Knowledge domains">
+          {entryDomains.map(({ title, slug }) => <li><a href={`/topics/${slug}/`}>{title}</a></li>)}
+        </ul>
+      )}
+      <p class="research-format">{format.label}</p>
+      <h1>{title}</h1>
       {frontmatter.warning && <p class="warning">{frontmatter.warning}</p>}
       <slot />
     </article>
@@ -25,5 +32,9 @@ const date = rawDate && !Number.isNaN(rawDate.valueOf())
   .content.center-images :global(img) {
     display: block;
     margin-inline: auto;
+  }
+
+  .content.center-images :global(img[src$=".svg"]) {
+    background: #1c2121;
   }
 </style>

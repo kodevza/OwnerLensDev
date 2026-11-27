@@ -1,28 +1,28 @@
 ---
 import '../styles/global.css';
-import { Blocks, BookOpen, GitFork, NotebookPen, Workflow } from '@lucide/astro';
 
 interface Props {
   title?: string;
   description?: string;
   current?: string;
+  type?: 'website' | 'article';
 }
 
 const {
-  title = 'OwnerLens — ownership evidence for Entra workload identities',
-  description = 'Open-source ownership evidence for Entra Service Principals, Managed Identities and Azure Resource Groups.',
-  current = ''
+  title = 'OwnerLens — Non-human identity',
+  description = 'A technical knowledge base on non-human identity, governance, workload access, AI agents and MCP.',
+  current = '',
+  type = 'website',
 } = Astro.props;
 
 const pageTitle = title.includes('OwnerLens') ? title : `${title} | OwnerLens`;
-const ownerLensVersion = import.meta.env.PUBLIC_OWNERLENS_VERSION ?? 'dev';
-const ownerLensGraphVersion = import.meta.env.PUBLIC_OWNERLENS_GRAPH_VERSION ?? 'dev';
-const ownerLensLiteVersion = import.meta.env.PUBLIC_OWNERLENS_LITE_VERSION ?? 'dev';
-const ownerLensReleaseUrl = ownerLensVersion === 'dev'
-  ? 'https://github.com/kodevza/OwnerLens/releases/latest'
-  : `https://github.com/kodevza/OwnerLens/releases/tag/${encodeURIComponent(ownerLensVersion)}`;
-const ownerLensGraphUrl = 'https://github.com/kodevza/OwnerLensGraph';
-const ownerLensLiteUrl = 'https://github.com/kodevza/OwnerLensLite';
+const navigation = [
+  { id: 'research', title: 'Research Library', url: '/research/' },
+  { id: 'domains', title: 'Domains', url: '/topics/' },
+  { id: 'tools', title: 'Tools', url: '/tools/' },
+  { id: 'become-an-author', title: 'Become an Author', url: '/become-an-author/' },
+  { id: 'advisory', title: 'Advisory', url: '/advisory/' },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -33,65 +33,38 @@ const ownerLensLiteUrl = 'https://github.com/kodevza/OwnerLensLite';
     <meta name="description" content={description} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:url" content={Astro.url.href} />
+    <link rel="icon" href="/favicon.ico" />
     <link rel="canonical" href={Astro.url.href} />
     <script src="/code-copy.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="site-shell">
       <header class="site-header">
         <div class="site-header__inner">
-          <div class="brand">
-            <span class="brand-text">
-              <a class="brand-home" href="/">OwnerLens</a>
-              <span class="product-versions" aria-label="Product versions">
-                <span class="badge">
-                  <span class="badge-bubble" aria-hidden="true"></span>
-                  <a href={ownerLensReleaseUrl}>OwnerLens</a> {ownerLensVersion}
-                </span>
-                <span class="badge">
-                  <span class="badge-bubble" aria-hidden="true"></span>
-                  <a href={ownerLensGraphUrl}>OwnerLensGraph</a> {ownerLensGraphVersion}
-                </span>
-                <span class="badge">
-                  <span class="badge-bubble" aria-hidden="true"></span>
-                  <a href={ownerLensLiteUrl}>OwnerLensLite</a> {ownerLensLiteVersion}
-                </span>
-              </span>
-            </span>
-          </div>
+          <a class="brand" href="/">
+            <img src="/brand/ownerlens.png" alt="OwnerLens" width="1087" height="175" />
+          </a>
           <nav class="nav" aria-label="Main navigation">
-            <a href="/how-it-works/" aria-current={current === 'how' ? 'page' : undefined}>
-              <Workflow size={16} aria-hidden="true" />
-              How it works
-            </a>
-            <a href="/docs/" aria-current={current === 'docs' ? 'page' : undefined}>
-              <BookOpen size={16} aria-hidden="true" />
-              Docs
-            </a>
-            <a href="/extend/" aria-current={current === 'extend' ? 'page' : undefined}>
-              <Blocks size={16} aria-hidden="true" />
-              Extend
-            </a>
-            <a href="/field-notes/" aria-current={current === 'field-notes' ? 'page' : undefined}>
-              <NotebookPen size={16} aria-hidden="true" />
-              Field notes
-            </a>
-            <a href="https://github.com/kodevza/OwnerLens">
-              <GitFork size={16} aria-hidden="true" />
-              GitHub
-            </a>
+            {navigation.map(({ id, title, url }) => (
+              <a href={url} aria-current={current === id ? (Astro.url.pathname === url ? 'page' : 'location') : undefined}>{title}</a>
+            ))}
           </nav>
         </div>
       </header>
-      <main>
+      <main id="main-content">
         <slot />
       </main>
       <footer class="site-footer">
         <div class="site-footer__inner">
-          <span>Static site. No tracking. No cookies.</span>
-          <span><a href="https://github.com/kodevza/OwnerLens">GitHub</a> · <a href="/field-notes/">Field notes</a></span>
+          <a class="brand" href="/">
+            <img src="/brand/ownerlens.png" alt="OwnerLens" width="1087" height="175" />
+          </a>
+          <nav class="footer-nav" aria-label="Footer navigation">
+            {navigation.map(({ title, url }) => <a href={url}>{title}</a>)}
+          </nav>
         </div>
       </footer>
     </div>

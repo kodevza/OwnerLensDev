@@ -18,6 +18,8 @@ title: "${title.replaceAll('"', '\\"')}"
 date: ${today}
 slug: "${slug}"
 description: ""
+topics: []
+format: technical-note
 warning: "Always verify current vendor documentation before treating this note as implementation guidance."
 ---
 

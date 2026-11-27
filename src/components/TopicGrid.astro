@@ -1,0 +1,21 @@
+---
+import { ArrowUpRight } from '@lucide/astro';
+import { domains } from '../lib/topics';
+
+interface Props {
+  heading?: 'h2' | 'h3';
+}
+
+const { heading: Heading = 'h3' } = Astro.props;
+---
+<ul class="topic-grid">
+  {domains.map(({ slug, title, description }) => (
+    <li>
+      <a class="topic-card" href={`/topics/${slug}/`}>
+        <ArrowUpRight class="topic-arrow" size={17} aria-hidden="true" />
+        <Heading>{title}</Heading>
+        <p>{description}</p>
+      </a>
+    </li>
+  ))}
+</ul>

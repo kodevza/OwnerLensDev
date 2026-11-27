@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NoteList from '../../components/NoteList.astro';
+import { notes } from '../../lib/notes';
+import { domains } from '../../lib/topics';
+
+export function getStaticPaths() {
+  return domains.map((domain) => ({ params: { topic: domain.slug }, props: { domain } }));
+}
+
+const { domain } = Astro.props;
+const entries = notes.filter((note) => note.topics.includes(domain.slug));
+---
+<BaseLayout title={domain.title} description={domain.description} current="domains">
+  <div class="domain-layout">
+    <div>
+      <header class="page-intro">
+        <h1>{domain.title}</h1>
+        <p class="lead">{domain.description}</p>
+      </header>
+      <section class="knowledge-section">
+        <h2>Key concepts</h2>
+        <dl class="concepts">
+          {domain.concepts.map(({ title, description }) => (
+            <div>
+              <dt>{title}</dt>
+              <dd>{description}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+      {entries.length > 0 && (
+        <section class="knowledge-section">
+          <h2>Publications</h2>
+          <a class="research-link domain-research-link" href={`/research/?domain=${domain.slug}`}>Explore in the Research Library →</a>
+          <NoteList items={entries} />
+        </section>
+      )}
+      {domain.sources && (
+        <section class="knowledge-section">
+          <h2>Reference documentation</h2>
+          <ul class="reference-list">
+            {domain.sources.map(({ url, title }) => <li><a href={url}>{title}</a></li>)}
+          </ul>
+        </section>
+      )}
+      {domain.slug === 'tools' && <a class="back-link" href="/tools/">Explore the OwnerLens tools →</a>}
+    </div>
+    <nav class="domain-nav" aria-label="Knowledge domains">
+      <a class="domain-nav__index" href="/topics/">All domains</a>
+      <ul>
+        {domains.map(({ slug, title }) => (
+          <li><a href={`/topics/${slug}/`} aria-current={slug === domain.slug ? 'page' : undefined}>{title}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</BaseLayout>

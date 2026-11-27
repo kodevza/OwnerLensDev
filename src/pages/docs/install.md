@@ -43,7 +43,7 @@ Invoke-OwnerLensCollectAzure -SubscriptionIds "sub-id-1,sub-id-2"
 Invoke-OwnerLensCollectEntra -TenantId "<tenant-id>"
 ```
 
-More collector options are documented in [tools/README.md](tools/README.md).
+More collector options are documented in [tools/README.md](https://github.com/kodevza/OwnerLens/blob/main/tools/README.md).
 
 Snapshot files can contain sensitive tenant, subscription, identity, group,
 credential, and activity-log metadata. Review them before sharing. Files matching

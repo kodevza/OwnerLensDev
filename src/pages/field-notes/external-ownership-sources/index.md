@@ -4,6 +4,8 @@ title: "Field Note: Bringing CMDB Ownership Evidence Into IAM Remediation Workfl
 date: 2026-07-23
 slug: "external-ownership-sources"
 description: "A practical note about correlating Entra and Azure identity evidence with CMDB, service catalog, and application ownership records."
+topics: [discovery-operations, governance]
+format: technical-note
 warning: "Always verify current Microsoft documentation before treating these notes as implementation guidance."
 ---
 
